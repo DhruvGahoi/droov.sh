@@ -1,4 +1,5 @@
 
+import Terminal from "@/components/Terminal";
 import Image from "next/image";
 
 export default function Home() {
@@ -9,7 +10,7 @@ export default function Home() {
         <span style={{color: "#a9b1d6"}}>type help to start</span>
       </h1>
 
-      {/* <Terminal /> */}
+      <Terminal />
 
       <a
         href="https://buymeacoffee.com/droovvv"
