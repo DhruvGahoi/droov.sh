@@ -1,23 +1,30 @@
 const os = require("os");
 
+// sl, cowsay
+
 const COMMANDS = [
   {
+    //done
     command: "about",
     description: "About Me"
   },
   {
+    //done
     command: "education",
     description: "My Education"
   },
   {
+    //done
     command: "skills",
     description: "My Skills"
   },
   {
+
     command: "projects",
     description: "My Projects"
   },
   {
+    //done
     command: "resume",
     description: "My Resume"
   },
@@ -26,15 +33,17 @@ const COMMANDS = [
     description: "Contact Me"
   },
   {
+    //done
     command: "hymn",
     description: "Groove with me"
   },
   {
+    //done
     command: "whoami",
     description: "About you"
   },
   {
-    command: "rm -rf",
+    command: "rm -rf /*",
     description: "At your own risk"
   },
   {
@@ -96,8 +105,8 @@ const getWhoAmI = () => {
 
 export const CONTENTS = {
   help: () => COMMANDS.map(
-    (command) => `<div className="flex justify-between">
-    <p className="text-[15px]">${command.command}</p>
+    (command) => `<div style="display: flex; justify-content: space-between;">
+    <p style="font-size: 15px">${command.command}</p>
     <p>${command.description}</p>
     </div>`
   ).join("") +
@@ -139,10 +148,6 @@ export const CONTENTS = {
 
   whoami: getWhoAmI,
 
-  clear: () =>{
-    return ''
-  },
-
   error: (input) => `<div className="help-command">sh: Unknown Command : ${input}</div>`
 }
 
@@ -151,6 +156,7 @@ function getAge(dateString){
   const birthDate = new Date(dateString);
 
   let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
   if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
 
   return age;

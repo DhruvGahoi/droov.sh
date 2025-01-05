@@ -1,18 +1,19 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useEffect, useState, useRef } from "react";
+import styles from "./Input.module.css";
 
-export default function Input({command, onSubmit }){
+export default function Input({ command, onSubmit }) {
   const [_command, setCommand] = useState(command ? command : "");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setCommand("");
     return onSubmit(_command);
-  }
+  };
 
   return (
-    <form>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <label htmlFor="command">
         <span style={{ color: "#ff9e64" }}>λ</span> ::{" "}
         <span style={{ color: "var(--primary)" }}>~</span>{" "}
@@ -20,14 +21,14 @@ export default function Input({command, onSubmit }){
       </label>
 
       <input
-      type="text"
-      className="bg-transparent border-0 outline-none pl-1.5 text-[var(--text-color)] min-w-[calc(100%-100px)"
-      value={_command}
-      onChange={(e) => setCommand(e.target.value)}
-      disabled={command ? true : false}
-      ref={(input) => input && !command && input.focus()}
-      autoFocus={command === ""}
+        type="text"
+        className={styles.input}
+        value={_command}
+        onChange={(e) => setCommand(e.target.value)}
+        disabled={command ? true : false}
+        ref={(input) => input && !command && input.focus()}
+        autoFocus={command === ""}
       />
     </form>
-  )
+  );
 }

@@ -1,14 +1,22 @@
-"use client"
+"use client";
 
-import { useState, useRef } from "react"
-import { CONTENTS } from "../utils/commands";
+import { useRef, useState } from "react";
+import { CONTENTS } from "../utils/commandHelper";
 import Command from "./Command";
 import styles from "./Terminal.module.css";
 
-export default function Terminal(){
+export default function Terminal() {
   const [commands, setCommands] = useState([]);
   const [loading, setLoading] = useState(false);
   const terminalRef = useRef(null);
+
+  const escapeHTML = (str) =>
+    str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
 
   const addCommand = async (command) => {
     let output;
@@ -29,13 +37,14 @@ export default function Terminal(){
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   };
+
   return (
     <div className={styles.terminal} ref={terminalRef}>
-        {/* <Command command="help" output="Some very long text will go in here" /> */}
-        {commands.map(({ command, output }, index) => (
-          <Command command={command} output={output} key={index} />
-        ))}
-        {!loading && <Command onSubmit={(command) => addCommand(command)} />}
-      </div>
-    );
+      {/* <Command command="help" output="Some very long text will go in here" /> */}
+      {commands.map(({ command, output }, index) => (
+        <Command command={command} output={output} key={index} />
+      ))}
+      {!loading && <Command onSubmit={(command) => addCommand(command)} />}
+    </div>
+  );
 }
