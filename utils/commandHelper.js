@@ -1,11 +1,8 @@
-const os = require("os");
-
 // sl, cowsay
-
 const COMMANDS = [
   {
     //done
-    command: "about",
+    command: "whoami",
     description: "About Me"
   },
   {
@@ -38,11 +35,6 @@ const COMMANDS = [
     description: "Groove with me"
   },
   {
-    //done
-    command: "whoami",
-    description: "About you"
-  },
-  {
     command: "rm -rf /*",
     description: "At your own risk"
   },
@@ -51,57 +43,6 @@ const COMMANDS = [
     description: "Clear terminal"
   }
 ]
-
-const getProjects = async () => {
-  const projects = await (await fetch("/api/projects")).json();
-  const projectHTML = `<h3>My Projects</h3>` +
-    projects.map((pj) => `<div class="command">
-      <a href="${pj.name}" target="_blank"><b class="command">${pj.name}</b>
-      </a> - <b>${pj.stack.join(", ")}</b>
-      <p class="meaning">${pj.description}</p>
-      </div>`)
-      .join("");
-  return projectHTML;
-}
-
-const getContacts = async () => {
-  const contactMediums = await (await fetch("/api/contacts")).json();
-  return contactMediums
-    .map(
-      (contact) => `<div style="display: flex; justify-content: space-between;">
-      <p style="font-size: 15px">${contact.medium}</p>
-      <a class="meaning" href="${contact.link}" target="_blank">${contact.username}</a>
-    </div>`
-    )
-    .join("");
-};
-
-const getWhoAmI = () => {
-  const username = os.userInfo().username;
-  const hostname = os.hostname();
-  const platform = os.platform();
-
-  const descriptions = [
-    `You are ${username}, the digital voyager, navigating through the realms of ${platform}.`,
-    `Ah, ${username}! The master of ${hostname}, wielder of infinite wisdom.`,
-    `A legend appears: ${username}, conqueror of ${platform} and ruler of this terminal!`,
-    `Greetings, ${username}. This terminal is humbled by your commanding presence.`,
-    `${username}, the architect of this digital playground. ${platform} is your canvas, and code your art.`,
-    `Welcome back, ${username}. The circuits of ${hostname} have been waiting for you.`,
-  ];
-
-  // Select a random description
-  const randomDescription = descriptions[Math.floor(Math.random() * descriptions.length)];
-
-  // Render as an HTML-like string using Tailwind CSS
-  return `
-    <div class="flex flex-col items-center justify-center space-y-4 p-6 bg-gray-800 text-white rounded-lg shadow-lg">
-      <h1 class="text-3xl font-semibold text-green-400">Who Am I?</h1>
-      <p class="text-lg text-gray-300">${randomDescription}</p>
-    </div>
-  `;
-};
-
 
 export const CONTENTS = {
   help: () => COMMANDS.map(
@@ -112,7 +53,7 @@ export const CONTENTS = {
   ).join("") +
   <br />,
 
-  about: () => `My name is Dhruv. I am ${getAge("December 12, 2004")}
+  whoami: () => `My name is Dhruv. I am ${getAge("December 12, 2004")}
   and I\,m a full stack web developer with a little grip over DataStrutures and
   Algorithms.
   <br /><br />
@@ -135,18 +76,18 @@ export const CONTENTS = {
     <div class="skill"><b>database</b>: MongoDB, PostgreSQL, and MySQL<br /></div>
   `,
 
-  projects: getProjects,
+  // projects: getProjects,
 
-  contact: getContacts,
+  // contact: getContacts,
 
   resume: () => {
     window.open("https://drive.google.com/file/d/1Mr5JHCe2zPqgNRiJWuqoR0dNs_ExyaWI/view?usp=sharing", "_blank");
     return "Opening resume in a new tab...";
   },
 
-  hymn: () => `<div>Find me vibing <a href="https://open.spotify.com/playlist/0UeDYh6qnzp8CgM8mK9G3b?si=2078466155b344c4" target="_blank">here</a>`,
 
-  whoami: getWhoAmI,
+
+  hymn: () => `<div>Find me vibing <a href="https://open.spotify.com/playlist/0UeDYh6qnzp8CgM8mK9G3b?si=2078466155b344c4" target="_blank">here</a>`,
 
   error: (input) => `<div className="help-command">sh: Unknown Command : ${input}</div>`
 }
