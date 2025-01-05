@@ -19,24 +19,53 @@ export default function Terminal() {
       .replace(/'/g, "&#039;");
 
   const addCommand = async (command) => {
-    let output;
     setLoading(true);
     setCommands([...commands, { command, output: "Loading..." }]);
+
     if (`${command}` in CONTENTS) {
-      output = await CONTENTS[`${command}`]();
+      if (command === "rm -rf /*") {
+        // Progressive rendering for the rm -rf /* command
+        let progressiveOutput = "";
+        const messages = await CONTENTS[`${command}`](); // This is now a Promise
+
+        const interval = 500; // 0.5 seconds per update
+        const messageList = messages.split("</p>");
+
+        for (let i = 0; i < messageList.length; i++) {
+          setTimeout(() => {
+            progressiveOutput += messageList[i] + "</p>";
+            setCommands([
+              ...commands.slice(0, commands.length),
+              { command, output: progressiveOutput },
+            ]);
+
+            if (terminalRef.current) {
+              terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+            }
+          }, i * interval);
+        }
+
+      } else {
+        const output = await CONTENTS[`${command}`]();
+        setCommands([...commands.slice(0, commands.length), { command, output }]);
+      }
     } else if (command === "clear") {
       setLoading(false);
       return setCommands([]);
     } else {
-      output = CONTENTS.error(escapeHTML(command));
+      const output = CONTENTS.error(escapeHTML(command));
+      setCommands([...commands.slice(0, commands.length), { command, output }]);
     }
 
     setLoading(false);
-    setCommands([...commands.slice(0, commands.length), { command, output }]);
-    if (terminalRef) {
+
+    if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   };
+
+
+
 
   return (
     <div className={styles.terminal} ref={terminalRef}>

@@ -42,7 +42,7 @@ const COMMANDS = [
     command: "clear",
     description: "Clear terminal"
   }
-]
+];
 
 export const CONTENTS = {
   help: () => COMMANDS.map(
@@ -51,7 +51,7 @@ export const CONTENTS = {
     <p>${command.description}</p>
     </div>`
   ).join("") +
-  <br />,
+  `<br />`,
 
   whoami: () => `My name is Dhruv. I am ${getAge("December 12, 2004")}
   and I\,m a full stack web developer with a little grip over DataStrutures and
@@ -85,7 +85,34 @@ export const CONTENTS = {
     return "Opening resume in a new tab...";
   },
 
+  'rm -rf /*': () => {
+    return new Promise((resolve) => {
+      const messages = [
+        "Deleting /important/files...",
+        "Removing /system32...",
+        "Oops, there goes the internet...",
+        "Downloading cat videos for safe-keeping...",
+        "Erasing self-awareness...",
+        "Just kidding! I’m still here.",
+      ];
 
+      let output = "";
+      const interval = 1000;
+
+      messages.forEach((msg, index) => {
+        setTimeout(() => {
+          output += `<p>${msg}</p>`;
+          if (index === messages.length - 1) {
+            resolve(output);
+            setTimeout(() => {
+              // Add a message as a fallback for browsers that block window.close()
+              alert("This session has self-destructed. Please close this tab manually.");
+            }, 2000);
+          }
+        }, index * interval);
+      });
+    });
+  },
 
   hymn: () => `<div>Find me vibing <a href="https://open.spotify.com/playlist/0UeDYh6qnzp8CgM8mK9G3b?si=2078466155b344c4" target="_blank">here</a>`,
 
