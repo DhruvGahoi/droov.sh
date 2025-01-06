@@ -85,7 +85,7 @@ export const CONTENTS = {
 
   contact: () => `
     <div
-      <p>If you'd like to get in touch with me, feel free to reach out through any of the following:</p>
+      <p>Reach out through any of the following:</p>
         <a href="mailto:dhruvvgahoi@gmail.com" target="_blank">
           <FaEnvelope style="font-size: 15px; margin-right: 10px;" />
           Email
@@ -134,7 +134,6 @@ export const CONTENTS = {
           if (index === messages.length - 1) {
             resolve(output);
             setTimeout(() => {
-              // Add a message as a fallback for browsers that block window.close()
               alert("This session has self-destructed. Please close this tab manually.");
             }, 2000);
           }
