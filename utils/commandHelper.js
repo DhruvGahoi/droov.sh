@@ -154,7 +154,7 @@ export const CONTENTS = {
 
   hymn: () => `<div>Find me vibing <a href="https://open.spotify.com/playlist/0UeDYh6qnzp8CgM8mK9G3b?si=2078466155b344c4" target="_blank">here</a>`,
 
-  error: (input) => `<div className="help-command">sh: Unknown Command : ${input}</div>`
+  error: (input) => `<div className="help-command" style="color: red;">sh: Unknown Command : ${input}</div>`
 }
 
 function getAge(dateString){
