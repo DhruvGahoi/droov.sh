@@ -22,11 +22,13 @@ export default function Terminal() {
     setLoading(true);
     setCommands([...commands, { command, output: "Loading..." }]);
 
-    if (`${command}` in CONTENTS) {
-      if (command === "rm -rf /*") {
-        // Progressive rendering for the rm -rf /* command
+    const [cmd, ...args] = command.split(" "); // Split the command and its arguments
+    const message = args.join(" "); // Combine the arguments into a single string
+
+    if (cmd in CONTENTS) {
+      if (cmd === "rm -rf /*") {
         let progressiveOutput = "";
-        const messages = await CONTENTS[`${command}`](); // This is now a Promise
+        const messages = await CONTENTS[cmd](); // This is now a Promise
 
         const interval = 500; // 0.5 seconds per update
         const messageList = messages.split("</p>");
@@ -44,12 +46,12 @@ export default function Terminal() {
             }
           }, i * interval);
         }
-
       } else {
-        const output = await CONTENTS[`${command}`]();
+        // Check for cowsay specifically to handle its message
+        const output = await CONTENTS[cmd](cmd === "cowsay" ? message : undefined);
         setCommands([...commands.slice(0, commands.length), { command, output }]);
       }
-    } else if (command === "clear") {
+    } else if (cmd === "clear") {
       setLoading(false);
       return setCommands([]);
     } else {
@@ -63,6 +65,7 @@ export default function Terminal() {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   };
+
 
 
 

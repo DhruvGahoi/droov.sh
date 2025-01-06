@@ -1,5 +1,5 @@
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
-
+import { say } from "cowsay";
 const COMMANDS = [
   {
     //done
@@ -141,6 +141,16 @@ export const CONTENTS = {
         }, index * interval);
       });
     });
+  },
+
+  cowsay: (message) => {
+    const text = message && message.trim() !== "" ? message : "Moo!";
+    const output = say({
+      text,
+      e: "oo",
+      T: "U ",
+    });
+    return `<pre style="font-family : monospace; white-space: pre-wrap;">${output}</pre>`;
   },
 
   hymn: () => `<div>Find me vibing <a href="https://open.spotify.com/playlist/0UeDYh6qnzp8CgM8mK9G3b?si=2078466155b344c4" target="_blank">here</a>`,
