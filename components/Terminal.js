@@ -46,7 +46,7 @@ export default function Terminal() {
         }, index * interval);
       });
     } else if (cmd === "cowsay") {
-      const output = await CONTENTS[cmd](message); // Pass message as argument
+      const output = await CONTENTS[cmd](message);
       setCommands((prev) => [...prev.slice(0, prev.length - 1), { command, output }]);
     } else if (cmd in CONTENTS) {
       const output = await CONTENTS[cmd]();
