@@ -1,6 +1,6 @@
 import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { say } from "cowsay";
-const COMMANDS = [
+export const COMMANDS = [
   {
     //done
     command: "whoami",
@@ -132,7 +132,7 @@ export const CONTENTS = {
   },
   
 
-  contact: () => `
+  socials: () => `
     <div
       <p>Reach out through any of the following:</p>
         <a href="mailto:dhruvvgahoi@gmail.com" target="_blank">
