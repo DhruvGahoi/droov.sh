@@ -14,25 +14,25 @@ const COMMANDS = [
   {
     //done
     command: "skills",
-    description: "My Skills",
+    description: "my skills",
   },
-  // {
-  //   command: "projects",
-  //   description: "My Projects"
-  // },
+  {
+    command: "projects",
+    description: "my projects"
+  },
   {
     //done
     command: "resume",
-    description: "My Resume",
+    description: "my resume",
   },
   {
-    command: "contact",
-    description: "Contact Me",
+    command: "socials",
+    description: "connect with me",
   },
   {
     //done
     command: "hymn",
-    description: "Groove with me",
+    description: "groove with me",
   },
   {
     //done
@@ -47,9 +47,32 @@ const COMMANDS = [
   {
     //done
     command: "clear",
-    description: "Clear terminal",
+    description: "clear terminal",
   },
 ];
+
+const PROJECTS_LIST = [
+  {
+    title: "FileGo",
+    link: "https://filego-tau.vercel.app/",
+    description: "SaaS that allows users to upload files and get the sharable download URLs"
+  },
+  {
+    title: "Aether",
+    link: "https://github.com/DhruvGahoi/aether",
+    description: "Compiler for C, built in C."
+  },
+  {
+    title: "Qualysis",
+    link: "https://github.com/DhruvGahoi/qualysis",
+    description: "Platform designed to streamline every aspect of your hiring process"
+  },
+  {
+    title: "Planit",
+    link: "https://github.com/DhruvGahoi/planit",
+    description: "Platform for managing your all events."
+  }
+]
 
 export const CONTENTS = {
   help: () =>
@@ -63,30 +86,51 @@ export const CONTENTS = {
     `<br />`,
 
   whoami: () =>
-    `My name is Dhruv. I am ${getAge("December 12, 2004")}
-  and I'm a full stack web developer with a little grip over DataStructures and
-  Algorithms. I mean its for fun ig...
-  <br /><br />
-  I love coding in Javascript, Typescript and C/C++, and have worked with the frameworks like ReactJS, NextJS, ExpressJS and
-  MongoDB. I am currently learning Devops, if you can help me learning in any of these, do let me know!!
-  <br /><br />
-  I just shifted to linux, will be sharing my experience and dotfiles <a href="https://github.com/DhruvGahoi" target="_blank">here</a>
-  <br /><br />
-  I also eagerly takes part in various hackathons happening around :)!!
+    `Hello I'm Dhruv, ${getAge("December 12, 2004")}
+    and I'm a full stack web developer with a little grip over DataStructures and
+    Algorithms. Love to play contests!!
+    <br /><br />
+    I'm a Linux and (coffee) enthusiast and love fidgeting around with the stuffs.
+    <br /><br />
+    I also love to take part in hackathons happening around :) and in my free time, playing CTFs for fun!!
   `,
 
   education: () =>
-    `I completed my schooling from <a href="https://bkdaldrichpublicschool.org.in/" target="_blank">Aldrich Public School, Orai</a>
-  and a pre final year student at <a href="https://vitbhopal.ac.in/" target="_blank">Vellore Institute of Technology.</a>`,
+    `I completed my schooling from <a href="https://bkdaldrichpublicschool.org.in/" target="_blank">Aldrich Public School</a>
+    and a final year student at <a href="https://vitbhopal.ac.in/" target="_blank">Vellore Institute of Technology.</a>`,
 
-  skills: () =>
-    `I am experienced with C/C++, Javascript and Typescript and some other web technologies dominating at the time : <br />
-    <div class="skill"><b>core</b>: HTML, CSS, Node.js<br /></div>
-    <div class="skill"><b>frameworks</b>: React, NextJS and Express<br /></div>
-    <div class="skill"><b>database</b>: MongoDB and PostgreSQL<br /></div>
-  `,
+    skills: () =>
+      `<div class="skill">
+          <span style="font-weight: bold; font-size: 16px; color: #4ea1f3;">Languages</span>: 
+          C/C++, Typescript, Javascript, Python, Rust(newbie)<br />
+       </div>
+       <div class="skill">
+          <span style="font-weight: bold; font-size: 16px; color: #4ea1f3;">Frameworks</span>: 
+          React, NextJS, Express<br />
+       </div>
+       <div class="skill">
+          <span style="font-weight: bold; font-size: 16px; color: #4ea1f3;">Tools</span>: 
+          Git, Docker, PostgreSQL, MongoDB, MySQL, Redis<br />
+       </div>
+       <div class="skill">
+          <span style="font-weight: bold; font-size: 16px; color: #4ea1f3;">Devops</span>: 
+          AWS EC2, AWS S3, AWS IAM, AWS EKS<br />
+       </div>`,
+    
 
-  // projects: getProjects,
+  projects: () => {
+    return PROJECTS_LIST.map(
+      (proj) => `
+        <div style="border: 1px solid #888; border-radius: 8px; padding: 10px; margin: 8px 0;">
+          <a href="${proj.link}" target="_blank" style="font-weight: bold; font-size: 16px; color: #4ea1f3; text-decoration: none;">
+            ${proj.title}
+          </a>
+          <p style="margin: 5px 0 0 0; font-size: 14px;">${proj.description}</p>
+        </div>
+      `
+    ).join("");
+  },
+  
 
   contact: () => `
     <div
@@ -95,17 +139,17 @@ export const CONTENTS = {
           <FaEnvelope style="font-size: 15px; margin-right: 10px;" />
           Email
         </a>
-
+        <br>
         <a href="https://github.com/DhruvGahoi" target="_blank">
           <FaGithub style="font-size: 15px; margin-right: 10px;" />
           GitHub
         </a>
-
+        <br>
         <a href="https://www.linkedin.com/in/dhruv-gahoi/" target="_blank">
           <FaLinkedin style="font-size: 15px; margin-right: 10px;" />
           LinkedIn
         </a>
-
+        <br>
         <a href="https://x.com/DhruvvGahoi" target="_blank">
           <FaTwitter style="font-size: 15px; margin-right: 10px;" />
           Twitter
@@ -116,7 +160,7 @@ export const CONTENTS = {
 
   resume: () => {
     window.open(
-      "https://drive.google.com/file/d/1Mr5JHCe2zPqgNRiJWuqoR0dNs_ExyaWI/view?usp=sharing",
+      "https://drive.google.com/file/d/1XSDh5Dsn0aUhdo2d4Anc35n-aqsGSE7Q/view?usp=sharing",
       "_blank",
     );
     return "Opening resume in a new tab...";
