@@ -86,13 +86,15 @@ export const CONTENTS = {
     `<br />`,
 
   whoami: () =>
-    `Hello I'm Dhruv, ${getAge("December 12, 2004")}
-    and I'm a full stack web developer with a little grip over DataStructures and
-    Algorithms. Love to play contests!!
-    <br /><br />
-    I'm a Linux and (coffee) enthusiast and love fidgeting around with the stuffs.
-    <br /><br />
-    I also love to take part in hackathons happening around :) and in my free time, playing CTFs for fun!!
+    `Hello, I'm Dhruv, ${getAge("December 12, 2004")}  
+      A passionate Full Stack Web Developer with a strong interest in Data Structures & Algorithms and cloud computing as well.  
+
+      <br /><br />  
+      I'm a Linux (and ☕ coffee) enthusiast who loves tinkering with systems, experimenting with new tools, and exploring the world of Cloud Computing.  
+
+      <br /><br />  
+      I thrive in collaborative environments — whether it's building at hackathons or solving challenges in CTFs, or pushing my skills further in coding contests or fixing bugs.  
+
   `,
 
   education: () =>
