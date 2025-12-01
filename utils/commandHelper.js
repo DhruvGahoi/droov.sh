@@ -162,7 +162,7 @@ export const CONTENTS = {
 
   resume: () => {
     window.open(
-      "https://drive.google.com/file/d/1ZvDfTF4UW32CxsN2w7AUa2EV2_pobpXR/view?usp=drive_link",
+      "https://drive.google.com/file/d/1PMb61a0Ai3j2acCpwsplmNk0LBAdarmT/view?usp=sharing",
       "_blank",
     );
     return "Opening resume in a new tab...";
